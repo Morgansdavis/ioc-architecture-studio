@@ -25,13 +25,12 @@
         </nav>
     </div>
     <!-- small bouncing dot at the bottom of the -->
-    <div class="absolute bg-white bottom-5p left-[cacl(50% - 1rem)] w-8 h-8 rounded-full bouncing-animation">
-    </div>
+    <a class="absolute bottom-5p left-[cacl(50% - 1rem)]" href="#headersection"> <div class="bg-white  w-8 h-8 rounded-full bouncing-animation"> </div></a> 
   </section>
   {% endif %}
   <!-- sticky header -->
   {% if page.unique-header != true %}
-  <header class="sticky top-0 px-5p p-8 bg-white border-black z-50">
+  <header class="sticky top-0 px-5p p-8 bg-white border-black z-50" id="headersection">
     <div class="flex justify-between max-w-screen-2xl mx-auto">
       <nav class="flex justify-start items-center">
         <a href="/" class="logo ml-2 flex items-center">

@@ -404,6 +404,34 @@ video {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.container {
+  width: 100%;
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
 .img-overlay {
   position: absolute;
   top: 0px;
@@ -584,9 +612,6 @@ video {
 .min-h-100 {
   min-height: 100vh;
 }
-.min-h-70 {
-  min-height: 70vh;
-}
 .min-h-\[25vh\] {
   min-height: 25vh;
 }
@@ -611,6 +636,9 @@ video {
 .w-6 {
   width: 1.5rem;
 }
+.w-32 {
+  width: 8rem;
+}
 .w-4 {
   width: 1rem;
 }
@@ -622,9 +650,6 @@ video {
 }
 .w-\[150\%\] {
   width: 150%;
-}
-.w-32 {
-  width: 8rem;
 }
 .max-w-screen-2xl {
   max-width: 1536px;
@@ -640,6 +665,9 @@ video {
 }
 .flex-shrink-0 {
   flex-shrink: 0;
+}
+.shrink {
+  flex-shrink: 1;
 }
 .grow {
   flex-grow: 1;
@@ -986,26 +1014,36 @@ background-color: #000;
 /* burger menu */
 
 
-
-.pulse-animation{
-  /* background-color: aqua; */
-  animation: pulse 1s ease-in-out infinite alternate;
-}
-.pulse-animation:hover{
-  animation-play-state: paused;
-}
-.bouncing-animation{
+/**************** bouncing dot ***************/
+.bouncing-animation {
   animation: bounce 1s ease-in-out infinite alternate;
 }
 
 @keyframes bounce {
-  from {translate: 0 0;}
-  to { translate: 0 -1rem;}
+  from {
+    translate: 0 0;
+  }
+  to { 
+    translate: 0 -1rem;
+  }
+}
+
+/****************** pulsing dot *************/
+.pulse-animation {
+  animation: pulse 1s ease-in-out infinite alternate;
+}
+
+.pulse-animation:hover {
+  animation-play-state: paused;
 }
 
 @keyframes pulse {
-  from {scale:1;}
-  to { scale: 1.2}
+  from {
+    scale: .50;
+  }
+  to { 
+    scale: 1;
+  }
 }
 
 @media (min-width: 640px) {
@@ -1063,3 +1101,4 @@ background-color: #000;
 .\[\&\>\:nth-child\(2n\)\]\:aspect-\[2\/3\]>:nth-child(2n) {
   aspect-ratio: 2/3;
 }
+

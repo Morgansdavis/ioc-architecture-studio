@@ -1,244 +1,113 @@
-// burger code simple
-
-console.log('start')
-
+///////////// Burger Menu //////////////
+// First we define our js variables 
 const burgerButton = document.querySelector('.burger-button')
 const burgerMenu = document.querySelector('.burger-menu')
-
+// then we start righting our new function
 function toggleBurgerMenu() {
+// log the click just to check its working. feel free to remove after you are done
   console.log('click')
+  // here we check to see if the burger button has the class of active
   if (burgerButton.classList.contains("active")){
+  // more consle.log for testing
     console.log('has active')
+    // remove the class of active
     burgerButton.classList.remove("active")
+    // gsap to close the email
     gsap.to(burgerMenu, {
+    // width to shrink it
         width: 0,
-        opacity: 0,
+     //padding to minimilistic so it wont overflow
+        padding: '2px 0',
     })
 } else {
+	// console for more testing
     console.log('no has active')
-    
+    // re-adds the class for tracking
     burgerButton.classList.add("active")
+    // opens up the burger menu and does the opsite of the close
     gsap.to(burgerMenu, {
         width: "auto",
         opacity: 1,
-        
+        padding: '2px 1.5rem'
     })
   }
 }
 
-if( burgerButton ){
-    burgerButton.addEventListener('click', toggleBurgerMenu)
-}
+// finally link it to the click action of the burger button
+burgerButton.addEventListener('click', toggleBurgerMenu)
 
 
-const navPoints = document.querySelectorAll('.navpoint')
+////////////// nav point //////////////////////////
+//  first we are finding all of the elements that have a class of scroll-in-from-bottom
+const navPoints = document.querySelectorAll(".navpoint")
 
-function toggleNavpointOpen(e) {
-  let popout = e.target.querySelector('.sub-points')
-    gsap.to(popout, {
-        width: 'auto',
+// for each of them we are going to attach a gsap animation ( like a jekyll for loop just in js :D )
+navPoints.forEach(object => {
+
+// First we define our js variables 
+const subPoints = object.querySelector('.sub-points')
+// then we start righting our new function
+function toggleSubPoints() {
+// log the click just to check its working. feel free to remove after you are done
+  console.log('click')
+  // here we check to see if the burger button has the class of active
+  if (object.classList.contains("active")){
+  // more consle.log for testing
+    console.log('has active')
+    // remove the class of active
+    object.classList.remove("active")
+    // gsap to close the email
+    gsap.to(subPoints, {
+    // width to shrink it
+        width: 0,
+     //padding to minimilistic so it wont overflow
+        padding: '2px 0',
+    })
+} else {
+	// console for more testing
+    console.log('no has active')
+    // re-adds the class for tracking
+    object.classList.add("active")
+    // opens up the burger menu and does the opsite of the close
+    gsap.to(subPoints, {
+        width: "auto",
         opacity: 1,
+        padding: '2px 1.5rem'
     })
   }
+}
 
-
-    function toggleNavpointClose(e) {
-      let popout = e.target.querySelector('.sub-points')
-        gsap.to(popout, {
-            width: 0,
-            opacity: 0,
-        })
-      }
-
-navPoints.forEach(point => {
-  point.addEventListener('mouseenter', toggleNavpointOpen)
-  point.addEventListener('mouseleave', toggleNavpointClose)
-
+// finally link it to the click action of the burger button
+object.addEventListener('mouseenter', toggleSubPoints)
+object.addEventListener('mouseleave', toggleSubPoints)
 })
 
-
-// console.log('start')
-
-// const burgerButton = document.querySelector('.burger-button')
-// const burgerMenu = document.querySelector('.burger-menu')
-
-// gsap.set(".burger-menu a", {
-//     y:-100,
-//     opacity:0,
-//     display:'inline-block',
-
-// })
-
-// function toggleBurgerMenu() {
-//   console.log('click')
-//   if (burgerButton.classList.contains("active")){
-//     console.log('has active')
-//     let burgerClose = gsap.timeline({
-//         duration:1
-//     });
-//     burgerClose.to(".burger-menu a", {
-//         y:'-100',
-//         opacity:0,
-//         stagger: .25
-//     }).to(".burger-menu", {       
-//         width: 0,
-//         duration: 1
-//     })
-//     burgerButton.classList.remove("active")
-// } else {
-//     console.log('no has active')
-//     let burgerOpen = gsap.timeline({
-//         duration:.5
-//     })
-//     burgerButton.classList.add("active")
-//     burgerOpen.to(burgerMenu, {
-//         width: "auto",
-//     }).to(".burger-menu a", {
-//         y: 0,
-//         opacity:1,
-//         stagger: .25
-//     })
-//   }
-// }
-
-// if( burgerButton ){
-//     burgerButton.addEventListener('click', toggleBurgerMenu)
-// }
+////////////// scroll in from bottom ////////
+//  first we are finding all of the elements that have a class of scroll-in-from-bottom
+const headings = document.querySelectorAll(".scroll-in-from-bottom")
 
 
+// for each of them we are going to attach a gsap animation ( like a jekyll for loop just in js :D )
+headings.forEach(object => {
 
-
-// scary galery code
-
-let animatedImages = document.querySelectorAll('.gallery-scroll')
-
-animatedImages.forEach(img => {
-  let tl = gsap.timeline({
-    // duration: "2",
-    scrollTrigger: {
-        trigger: img,
-        start: "top bottom",
-        end: "bottom top",
-        toggleActions: "play none none none",
-        scrub: true,
-        markers: true,
-    },
-    marker: true
-  })
-  .to(img, {scale: '1',})
-  .to(img, {scale: '1', })
-  .to(img, {scale: '.5',})
+// we start with a gsap timeline
+    let tl = gsap.timeline({
+    // here's where we start attching the animation to the scroll
+      scrollTrigger: {
+      	// this is what is triggering the start of the animation
+          trigger: object,
+        	// this one takes in to bits of info. the first is the part of the trigger element thats causing the trigger to start and the second one is where on the screen. both of them can be either top, center, bottom or a percentage (% are from the top of the container( as in trigger element or screen) )   
+          start: "top bottom",
+			// same as start but the end point of the animation          
+          end: "top center",
+          // now this is the most important line of code its what turns the triggers from a start point in to locking it to the scroll
+          scrub: true,
+          // last but not least this helps us to visualize the script
+          markers: false,
+      }
+    }).from(object,{
+        bottom:-200,
+        opacity:0
+    })
 })
 
-console.log('scroll in init')
-
-const bottomUp = document.querySelectorAll(".scroll-in-from-bottom")
-
-bottomUp.forEach(object => {
-  gsap.set(object,{
-    position: 'relative'
-  })
-    let tl = gsap.timeline({
-      // duration: "2",
-      scrollTrigger: {
-          trigger: object,
-          start: "top bottom",
-          end: "top 75%",
-          toggleActions: "play none none none",
-          scrub: true,
-          markers: false,
-      }
-    }).from(object,{
-        bottom:-300,
-        opacity:0
-    })
-    // .to(object,{
-    //     bottom: 300,
-    //     opacity:1
-    // })
-  })
-
-  
-  const objectsLeft = document.querySelectorAll(".scroll-in-from-left")
-  
-  objectsLeft.forEach(object => {
-    gsap.set(object,{
-      position: 'relative'
-    })
-    console.log('bob')
-    let tl = gsap.timeline({
-      // duration: "2",
-      scrollTrigger: {
-          trigger: object,
-          start: "top bottom",
-          end: "top 75%",
-          toggleActions: "play none none none",
-          scrub: true,
-          markers: false,
-      }
-    }).from(object,{
-        left:-300,
-        opacity:0
-    })
-    // .to(object,{
-    //     bottom: 300,
-    //     opacity:1
-    // })
-  })
-
-// console.log('bob')
-
-const objectsRight = document.querySelectorAll(".scroll-in-from-right")
-
-objectsRight.forEach(object => {
-  gsap.set(object,{
-    position: 'relative'
-  })
-    let tl = gsap.timeline({
-      // duration: "2",
-      scrollTrigger: {
-          trigger: object,
-          start: "top bottom",
-          end: "top 75%",
-          toggleActions: "play none none none",
-          scrub: true,
-          markers: false,
-      }
-    }).from(object,{
-        right:-300,
-        opacity:0
-    })
-    // .to(object,{
-    //     bottom: 300,
-    //     opacity:1
-    // })
-  })
-
-  const objectsleftBottom = document.querySelectorAll(".scroll-in-from-bottom-left")
-
-  objectsleftBottom.forEach(object => {
-  gsap.set(object,{
-    position: 'relative'
-  })
-    let tl = gsap.timeline({
-      // duration: "2",
-      scrollTrigger: {
-          trigger: object,
-          start: "top bottom",
-          end: "top 75%",
-          toggleActions: "play none none none",
-          scrub: true,
-          markers: false,
-      }
-    }).from(object,{
-        left:-300,
-        bottom:-300,
-        opacity:0
-    })
-    // .to(object,{
-    //     bottom: 300,
-    //     opacity:1
-    // })
-  })
-
-// console.log('bob')
