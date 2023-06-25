@@ -34,10 +34,10 @@ function toggleBurgerMenu() {
 }
 
 // finally link it to the click action of the burger button
-burgerButton.addEventListener('click', toggleBurgerMenu)
+burgerButton?.addEventListener('click', toggleBurgerMenu)
 
 
-////////////// nav point //////////////////////////
+/////////////////////// nav point //////////////////////////
 //  first we are finding all of the elements that have a class of scroll-in-from-bottom
 const navPoints = document.querySelectorAll(".navpoint")
 
@@ -82,7 +82,7 @@ object.addEventListener('mouseenter', toggleSubPoints)
 object.addEventListener('mouseleave', toggleSubPoints)
 })
 
-////////////// scroll in from bottom ////////
+///////////////////////// scroll in from bottom ///////////////////////
 //  first we are finding all of the elements that have a class of scroll-in-from-bottom
 const headings = document.querySelectorAll(".scroll-in-from-bottom")
 
@@ -106,8 +106,58 @@ headings.forEach(object => {
           markers: false,
       }
     }).from(object,{
-        bottom:-200,
+        y: 200,
         opacity:0
     })
 })
 
+///////////////////////// scroll in from left ///////////////////////
+//  first we are finding all of the elements that have a class of scroll-in-from-bottom
+const scrollLeft = document.querySelectorAll(".scroll-in-from-left")
+
+
+// for each of them we are going to attach a gsap animation ( like a jekyll for loop just in js :D )
+scrollLeft.forEach(object => {
+
+// we start with a gsap timeline
+    let tl = gsap.timeline({
+    // here's where we start attching the animation to the scroll
+      scrollTrigger: {
+      	// this is what is triggering the start of the animation
+          trigger: object,
+        	// this one takes in to bits of info. the first is the part of the trigger element thats causing the trigger to start and the second one is where on the screen. both of them can be either top, center, bottom or a percentage (% are from the top of the container( as in trigger element or screen) )   
+          start: "top bottom",
+			// same as start but the end point of the animation          
+          end: "top center",
+          // now this is the most important line of code its what turns the triggers from a start point in to locking it to the scroll
+          scrub: true,
+          // last but not least this helps us to visualize the script
+          markers: false,
+      }
+    }).from(object,{
+        x: -300,
+        opacity:0
+    })
+})
+
+////////////////////////////// gallery animation //////////////////////////////
+//  first we are finding all of the elements that have a class of scroll-in-from-bottom
+let animatedImages = document.querySelectorAll('.gallery-scroll')
+
+animatedImages.forEach(img => {
+  let tl = gsap.timeline({
+    // duration: "2",
+    scrollTrigger: {
+        trigger: img,
+        start: "top bottom",
+        end: "bottom top",
+        toggleActions: "play none none none",
+        scrub: true,
+        markers: true,
+    },
+    marker: true
+  })
+  .to(img, {scale: '1',})
+  .to(img, {scale: '1', })
+  .to(img, {scale: '.5',})
+})
